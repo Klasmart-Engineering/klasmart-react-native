@@ -30,5 +30,24 @@ Finally `landingPage.tsx` references some image assets (`.svg` format). These im
 * BackgroundCloudsBalloon (@/assets/img/landing/background_clouds_balloon.svg)
 * BackgroundGreenGrass (@/assets/img/landing/background_green_grass.svg)
 
+#### Material UI
+Based on research online it seems like a `Material UI` library with similar syntax exists for `React Native`. My first attempt will be to try using that to preferably avoid having to change too much layout or UI related code within each component.
 
+```sh
+npm install react-native-paper
+```
+
+`useMediaQuery` doesn't exist in `React Native`. There's libraries adding limited support for it but I think the better option is to not use it. Media queries is a very web specific function and should not be needed in a `React Native` application.
+
+`makeStyles` is not available in `React Native`. Instead there's `StyleSheet.create` which have almost the same behavior. I will replace any `makeStyles` with `StyleSheet.create`. `StyleSheet` in `React Native` try to simulate CSS for the web, naturally not all features or directives is available, so the style definition must be modified to be compatible.
+
+It seems out of the box React Native doesn't support `Themes`, to achieve feature parity we have to support dark and light themes. There's libraries providing this and I will try installing the `react-native-theme` library to facilitate that. Additionally this library will pull in `react-native-extended-stylesheet` library.
+
+I will create a new file where the themes can be defined, trying to replicate the granularity of themes and color palettes we have in the `Cordova` application.
+
+```sh
+npm install @dokuhero/react-native-theme
+```
+
+#### SVG Image Assets
 
