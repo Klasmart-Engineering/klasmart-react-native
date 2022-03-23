@@ -49,5 +49,13 @@ I will create a new file where the themes can be defined, trying to replicate th
 npm install @dokuhero/react-native-theme
 ```
 
+`Grid` component doesn't come included with `React Native` there is however a library `react-native-grid-component` we can add to include it. I will try using the `Grid` component from that library.
+
+```sh
+npm install react-native-grid-component
+```
+
+`react-native-grid-component` doesn't include Typescript type definition. We would have to generate our own type definitions or use a different library if we want to keep using the `Grid` component with type safety. Based on this information I think the best option might be to move away from `Grid` based layouts, this of course would severely reduce our ability to simply reuse UI components from the `Cordova` app. Even if we were able to find a good `Grid` component library, the way `Grid` would work in `React Native` would most likely be different from `Cordova`.
+
 #### SVG Image Assets
 
