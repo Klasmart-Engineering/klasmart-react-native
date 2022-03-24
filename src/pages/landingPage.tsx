@@ -1,28 +1,11 @@
-import { completeParentalGate } from "../../model/appModel";
-import DialogParentalLock from "@/app/components/ParentalLock";
-import { dialogsState } from "@/app/model/appModel";
-import KidsloopTextLogo from "@/assets/img/kidsloop_logo.svg";
-import BackgroundCloudsBalloon from "@/assets/img/landing/background_clouds_balloon.svg";
-import BackgroundGreenGrass from "@/assets/img/landing/background_green_grass.svg";
-import {
-    Button,
-    createStyles,
-    makeStyles,
-    Theme,
-    useMediaQuery,
-    useTheme,
-} from "@material-ui/core";
-import Grid from "@material-ui/core/Grid/Grid";
-import Typography from "@material-ui/core/Typography/Typography";
+import KidsloopTextLogo from "../assets/img/kidsloop_logo.svg";
+import BackgroundCloudsBalloon from "../assets/img/landing/background_clouds_balloon.svg";
+import BackgroundGreenGrass from "../assets/img/landing/background_green_grass.svg";
 import React from 'react';
-import { FormattedMessage } from "react-intl";
-import { useHistory } from "react-router-dom";
-import {
-    useRecoilState,
-    useSetRecoilState,
-} from "recoil";
+import { StyleSheet, Text, View, Button } from "react-native";
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
+/* 
+const landingPageStyle = StyleSheet.create({
     fullHeight: {
         height: `100%`,
     },
@@ -81,22 +64,65 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         },
     },
 }));
+*/
+
+const landingPageStyle = StyleSheet.create({
+    container: {
+        height: `100%`,
+        backgroundColor: `white`,
+        justifyContent: `center`,
+        alignItems: `center`,
+    },
+    backgroundTopImageContainer: {
+        position: `absolute`,
+        width: `100%`,
+        top: 0,
+        justifyContent: `center`,
+        alignItems: `center`,
+    },
+    backgroundBottomImageContainer: {
+        position: `absolute`,
+        width: `100%`,
+        bottom: 0,
+        justifyContent: `center`,
+        alignItems: `center`,
+    },
+    logoImageContainer: {
+        width: 300,
+        height: 81,
+        justifyContent: `center`,
+        alignItems: `center`,
+    },
+    subtitleText: {
+        color: `black`,
+        fontSize: 24,
+        fontWeight: `bold`,
+        marginTop: 4,
+    },
+    signInButtonContainer: {
+        marginTop: 40,
+        width: 343,
+        height: 58,
+    },
+});
 
 export function LandingPage (): JSX.Element {
-    const classes = useStyles();
-    const theme = useTheme();
-    const isSmUp = useMediaQuery(theme.breakpoints.up(`sm`));
-    const history = useHistory();
-    const setCompletedParentalChallenge = useSetRecoilState(completeParentalGate);
-    const [ dialogs, setDialogs ] = useRecoilState(dialogsState);
+    // const history = useHistory();
 
+    // TODO: Commented away right now because recoil is not compatible with react native.
+    // const setCompletedParentalChallenge = useSetRecoilState(completeParentalGate);
+    // const [ dialogs, setDialogs ] = useRecoilState(dialogsState);
+
+    /* 
     const setParentalLock = (open: boolean) => {
         setDialogs({
             ...dialogs,
             isParentalLockOpen: open,
         });
     };
+    */
 
+    /*
     if(dialogs.isParentalLockOpen){
         return(
             <DialogParentalLock
@@ -108,7 +134,29 @@ export function LandingPage (): JSX.Element {
             />
         );
     }
+    */
 
+    return (
+        <View style={landingPageStyle.container}>
+            <View style={landingPageStyle.backgroundTopImageContainer}>
+                <BackgroundCloudsBalloon width={`100%`} resizeMode={`cover`}/>
+            </View>
+            <View style={landingPageStyle.backgroundBottomImageContainer}>
+                <BackgroundGreenGrass width={`100%`} resizeMode={`cover`}/>
+            </View>
+                <View style={landingPageStyle.logoImageContainer}>
+                    <KidsloopTextLogo width={`100%`} height={`100%`} resizeMode={`contain`}/>
+                </View>
+                <Text style={landingPageStyle.subtitleText}>
+                    Education Platform for Students
+                </Text>
+            <View style={landingPageStyle.signInButtonContainer}>
+                <Button title={`Sign In`} />
+            </View>
+        </View>
+    );
+
+    /*
     return (
         <Grid
             container
@@ -156,7 +204,8 @@ export function LandingPage (): JSX.Element {
                         size="large"
                         color="secondary"
                         onClick={() => {
-                            setParentalLock(true);
+                            // setParentalLock(true);
+                            console.log(`click`);
                         }}>
                         <FormattedMessage
                             id={`landingPage.signIn`}
@@ -171,5 +220,5 @@ export function LandingPage (): JSX.Element {
             </div>
 
         </Grid>
-    );
+    ); */
 }

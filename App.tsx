@@ -1,6 +1,7 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StatusBar, Text, useColorScheme, View } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import { LandingPage } from "./src/pages/landingPage";
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -12,16 +13,7 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Text>Hello, World!</Text>
-        </View>
-      </ScrollView>
+          <LandingPage />
     </SafeAreaView>
   );
 };
