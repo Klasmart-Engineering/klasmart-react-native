@@ -57,5 +57,34 @@ npm install react-native-grid-component
 
 `react-native-grid-component` doesn't include Typescript type definition. We would have to generate our own type definitions or use a different library if we want to keep using the `Grid` component with type safety. Based on this information I think the best option might be to move away from `Grid` based layouts, this of course would severely reduce our ability to simply reuse UI components from the `Cordova` app. Even if we were able to find a good `Grid` component library, the way `Grid` would work in `React Native` would most likely be different from `Cordova`.
 
+Layouts in React Native work similar to CSS flexbox. It's defined using the `View` component which can be specified using similar attributes as web. Most UI layout in the Cordova application is defined using the Material UI `Grid` component. It seems the best approach will be do redo layout using the `View` component.
+
+My assessment based on these previous points about various components for UI layout used in the `Cordova` application is that we'll have to reimplement most of the frontend design in `React Native`. This will be faster than doing it natively since it's similar but not the same to regular React. Having the `Cordova` application UI to use as a reference will also help speed this up, both being able to look at it visually and being able to look at the code.
+
 #### SVG Image Assets
+
+To support SVG image assets in react native we have to instal a couple of libraries: `react-native-svg` and `react-native-svg-transformer`
+
+```sh
+npm install react-native-svg react-native-svg-transformer
+```
+
+We also have to update the `metro.config.js` file to instruct `React Native` to transform any `.svg` assets using the `react-native-svg-transformer` library.
+
+There is also additional work to be done to supprt using `.svg` assets within `Jest` unit tests. A full [guide](https://medium.com/mtholla/react-native-how-to-use-svgs-193e384e1d1b) can be used as a reference.
+
+*TODO* After following the previous guide to support `.svg` image assets it seems the editor doesn't properly understand `.svg` images is valid to import. So we'll have to spend some time to understand and fix that issue.
+
+#### Localization / Lokalise
+*TODO*
+
+#### Screen Orientation
+In the KidsLoop Cordova aplication screen orientation is locked to Portrait when user is on certain pages.
+
+*TODO* Figure out how to conventiently control the screen orientation from certain pages.
+
+### Conclusion
+I spent roughly 4-5 hours migrating the visual design and layout of the landing page. This was including researching but *not* implementing support for themes and localization. It's the first time I've worked with React Native so the time might be shorter once used to the workflow and API's.
+
+The landing page has a very simple layout and design with a couple of images, text, and a button. This might have contributed to being able to migrate it quickly. Other pages with more complex layout will most likely take longer time (e.g. scroll views and lists). 
 
