@@ -16,6 +16,6 @@ npx react-native start
 
 Finally build and install the application on the device:
 ```sh
-npx react-native run android
+npx react-native run-android
 ```
 
