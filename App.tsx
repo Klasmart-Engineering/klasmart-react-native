@@ -1,7 +1,7 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StatusBar, Text, useColorScheme, View } from "react-native";
+import { SafeAreaView, StatusBar, useColorScheme } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { LandingPage } from "./src/pages/landingPage";
+import { CmsTestPage } from "./src/pages/cmsTestPage";
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -13,7 +13,7 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-          <LandingPage />
+      <CmsTestPage />
     </SafeAreaView>
   );
 };
