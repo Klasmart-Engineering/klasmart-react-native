@@ -88,3 +88,30 @@ I spent roughly 4-5 hours migrating the visual design and layout of the landing 
 
 The landing page has a very simple layout and design with a couple of images, text, and a button. This might have contributed to being able to migrate it quickly. Other pages with more complex layout will most likely take longer time (e.g. scroll views and lists). 
 
+## Client Side Libraries
+We would be able to save a lot of time if we can reuse some of the client side libraries developed for web and cordova application. These libraries help us communicate with out backend services and API's.
+
+### CMS API Client
+Installing and investigating the dependencies of `CMS API Client` uncovers some dependencies which might cause issues. Listed below is the list of all dependencies the library requires.
+
+*Dependencies*
+* axios
+* react-query
+
+*Peer Dependencies*
+* axios
+* react
+* react-dom
+* react-query
+
+The biggest risk of these dependencies is `react-query`. It seems React Native should be supported reading the documentation, except for the developer tools widget. Here's a link to the documentation page for reference: [React Query Documentation](https://react-query.tanstack.com/react-native). We would have to implement some events manually when using React Native. 
+
+*Events*
+* Online Status Management
+* Refetch on App Focus
+* Refetch on Screen Focus
+
+### Live State
+
+
+
