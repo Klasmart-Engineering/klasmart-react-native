@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@dokuhero/react-native-theme": "^0.1.2",
+    "@kl-engineering/cms-api-client": "^2.2.3",
     "react": "17.0.2",
     "react-native": "0.67.4",
     "react-native-paper": "^4.11.2",
@@ -45,6 +46,9 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.svg": "<rootDir>/__mocks__/svgMock.js"
+    }
   }
 }
