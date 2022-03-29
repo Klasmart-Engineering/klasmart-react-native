@@ -92,6 +92,8 @@ The landing page has a very simple layout and design with a couple of images, te
 We would be able to save a lot of time if we can reuse some of the client side libraries developed for web and cordova application. These libraries help us communicate with out backend services and API's.
 
 ### CMS API Client
+
+#### Dependencies
 Installing and investigating the dependencies of `CMS API Client` uncovers some dependencies which might cause issues. Listed below is the list of all dependencies the library requires.
 
 *Dependencies*
@@ -110,6 +112,13 @@ The biggest risk of these dependencies is `react-query`. It seems React Native s
 * Online Status Management
 * Refetch on App Focus
 * Refetch on Screen Focus
+
+#### Implementation
+
+I've implemented basic unit tests to test if the `cms-api-client` library could be installed correctly in the React Native project. I'm also making components for testing the library running on actual device within the React Native build.
+
+#### Conclusion
+Both the unit tests and the component running inside of application is able to perform the network requests as expected. This indicated we should be able to use this library in React Native application without modification.
 
 ### Live State
 
