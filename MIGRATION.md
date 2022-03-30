@@ -120,7 +120,45 @@ I've implemented basic unit tests to test if the `cms-api-client` library could 
 #### Conclusion
 Both the unit tests and the component running inside of application is able to perform the network requests as expected. This indicated we should be able to use this library in React Native application without modification.
 
+### User Service
+There's no client side library for the `User Service` but the code interacting with `User Service` in the Cordova application is well separated. I will move that code to the React Native project and try implementing some tests.
+
+#### Dependencies
+* recoil
+* recoil-persist
+* @apollo/client
+
+Based on online research the `recoil` library is not supporting React Native yet. It's only used for persistent state and should be easily replaced by something else.
+
+The `node` runtime doesn't include `fetch` function when running unit tests. There seems to be multiple workarounds for this issue and the one I'm going to try doing is using `jest-fetch-mock` library.
+
+Upon trying to use `@apollo/client` I ran into an error:
+
+```
+Error: While trying to resolve module `@apollo/client` ...
+```
+
+After researching online it seemed possible to solve this by modifying the metro configuraton. This issue was solved by adding resolver matching for `cjs` files to `metro.config.js`
+
+Another issue occuring in the native logs is this one:
+```
+ReactContextBaseJavaModule: Unhandled SoftException
+    java.lang.RuntimeException: Catalyst Instance has already disappeared: requested by WebSocketModule
+```
+
+Exact side effect of this error is unknown so far. It's a risk if we can't find any solution for it. Up until this point I haven't found any noticable degradation of app functions because of it.
+
+Here's a github issue with other people experiencing the same problem:
+https://github.com/facebook/react-native/issues/28992
+
+#### Implementation
+Deleting the `atom.ts` file part of user service client code because of the unsupported `recoil` library. Additionally installing the `@apollo/client` library as it should be fully suported in React Native. Finally removing the code referencing internal state from the Cordova appliation, specifically related to region selection and user authentication token.
+
+To test the user service / graphql support in React Native I will take the same approach as with `CMS Api Client`, making basic integration tests and a component for running within the app build.
+
 ### Live State
+
+### WebRTC
 
 
 
