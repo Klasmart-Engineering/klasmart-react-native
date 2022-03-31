@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { FetchScheduleStatusText } from "../components/FetchScheduleStatusText";
+import { FetchScheduleStatusText } from "../components/fetchScheduleStatusText";
 import { CmsApiProvider } from "../providers/CmsApiProvider";
 
 const style = StyleSheet.create({

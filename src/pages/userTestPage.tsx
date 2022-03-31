@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { QueryMeStatusText } from "../components/QueryMeStatusText";
-import { FetchScheduleStatusText } from "../components/FetchScheduleStatusText";
+import { QueryMeStatusText } from "../components/queryMeStatusText";
+import { FetchScheduleStatusText } from "../components/fetchScheduleStatusText";
 import { UserServiceApolloClient } from "../services/user/userServiceApolloClient";
 
 const USER_SERVICE_ENDPOINT = `https://api.alpha.kidsloop.net/user/`;

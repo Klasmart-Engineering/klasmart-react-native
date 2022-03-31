@@ -156,9 +156,63 @@ Deleting the `atom.ts` file part of user service client code because of the unsu
 
 To test the user service / graphql support in React Native I will take the same approach as with `CMS Api Client`, making basic integration tests and a component for running within the app build.
 
+#### Conclusion
+The code and `GraphQL` connection seems to be working as intended with the limited unauthenticated request tested so far. The unresolved issue is a risk and we may have to spend some time resolving that problem if it turns out to cause any issues degrading performance or functions of the application.
+
 ### Live State
+The `kidsloop-live-state` library is responsible for signalling with `SFU2` service and in the future the communication with live server. Evaluating compatibility with this library is important because it would determine how much code we would have to write to connect with SFU.
+
+```sh
+npm install @kl-engineering/kidsloop-live-state
+```
+
+#### Dependencies
+* reduxjs/toolkit
+* eventemitter3
+* immer
+* nanoid
+* react-async-hook
+* redux
+* redux-immutable
+
+On initial inspection none of these libraries seem to have any reported issues with React Native.
+
+After installing the `kidsloop-live-state` library the metro development server is reporting errors, this is likely due to configuration error within the library itself and not because of React Native.
+
+```
+warn Package @kl-engineering/kidsloop-live-state has been ignored because it contains invalid configuration. Reason: Package subpath './package.json' is not defined by "exports" in /home/axel/Projects/kidsloop-react-native/node_modules/@kl-engineering/kidsloop-live-state/package.json
+```
+
+There's an issue reported about this in the `react-native-community/cli` repository. It seems it can be easily fixed by updating `package.json` file within the library.
+
+[Issue Link](https://github.com/react-native-community/cli/issues/1168)
+
+After making some local modifications to the `package.json` file within `kidsloop-live-state` I was able to import it properly. This all seems very odd so I will do some more testing later on in case it was just metro bundler or `npm` acting up.
+
+#### Implementation
+For this library I will create test components but not integration tests. This is because the things to test will:
+
+1. Require authentication to function
+2. Utilize camera and/or microphone
+
+TODO
+
+#### Conclusion
+TODO
 
 ### WebRTC
+We use the WebRTC standard to enumerate and use the device camera and microphone. This standard is built into most web browsers but not built into mobile apps by default, including React Native. There is a library for React Native `react-native-webrtc` adding this functionality.
 
+#### Implementation
+The `react-native-webrtc` library is missing type definitions for some API's. This makes working with the library very hard; especially with Typescript. Because of this issue we have to create some custom type definitions. This in itself is not a huge issue, but it can't be considered a stable contract between our application code and `react-native-webrtc`. We have no guarantees the ABI (for lack of a better term) doesn't change over time.
 
+The `react-native-webrtc` library will not ask for permissions automatically before trying to access camera or microphone resources. We have to implement the permissions checking ourselves. This might be different between Android and iOS since iOS usually doesn't require explicit permission requests, instead the iOS OS will ask for permissions automatically before trying to use any sensitive resources.
 
+I had to set the `minSdkVersion` to `24` for `react-native-webrtc` library to work, without it the application crash on startup.
+
+The `react-native-webrtc` library seems to be heavily geared towards selecting camera based on facing as opposed to selecting by ID's. This might make it more tricky for us to have the dropdown menus from current KidsLoop application to select the camera device. I don't think this would be a problem on mobile since it's very common to just provide front/back toggle regardless.
+
+The type information for camera track constraints doesn't seem to match the documentation. This will delay developers working with this and might cause some confusions.
+
+#### Conclusion
+So far I've been able to retrieve a camera stream and display it on screen. This only partly tests the `WebRTC` compatibility and I think we would need to estimate extra time in case anything goes wrong or doesn't work as expected. This is a high risk feature and it would be good to spend time and dig deeper to find possible limitations for both iOS and Android.

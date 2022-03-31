@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { useMeQuery } from "../services/user/queries/meQuery";
-import { GraphQLErrorText } from "./GraphQLErrorText";
+import { GraphQLErrorText } from "./graphQLErrorText";
 
 const style = StyleSheet.create({
     container: {

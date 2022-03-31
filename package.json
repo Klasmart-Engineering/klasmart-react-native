@@ -13,12 +13,15 @@
     "@apollo/client": "^3.5.10",
     "@dokuhero/react-native-theme": "^0.1.2",
     "@kl-engineering/cms-api-client": "^2.2.3",
+    "@kl-engineering/kidsloop-live-state": "^1.0.5-es2017",
     "graphql": "^16.3.0",
     "react": "17.0.2",
     "react-native": "0.67.4",
+    "react-native-element-dropdown": "^1.8.5",
     "react-native-paper": "^4.11.2",
     "react-native-svg": "^12.3.0",
-    "react-native-svg-transformer": "^1.0.0"
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-webrtc": "^1.98.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -27,6 +30,7 @@
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.66.15",
+    "@types/react-native-webrtc": "^1.75.5",
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
