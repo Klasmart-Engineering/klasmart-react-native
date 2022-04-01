@@ -98,3 +98,131 @@ We will also need to have the AzureB2C application implemented in higher environ
 applications are setup manually which isn't a big deal but is worth bearing in mind. A more dynamic approach with Terraform has been prototyped but there is significant complexity in setting up AzureB2C. 
 
 Another factor to bear in mind is that although we can create native interfaces Azure has a strong preference for managing the HTML used in signin/signup/password reset pages. This means that we're almost certainly tied to using a WebView for browser pages in the authentication process.
+## Client Side Libraries
+We would be able to save a lot of time if we can reuse some of the client side libraries developed for web and cordova application. These libraries help us communicate with out backend services and API's.
+
+### CMS API Client
+
+#### Dependencies
+Installing and investigating the dependencies of `CMS API Client` uncovers some dependencies which might cause issues. Listed below is the list of all dependencies the library requires.
+
+*Dependencies*
+* axios
+* react-query
+
+*Peer Dependencies*
+* axios
+* react
+* react-dom
+* react-query
+
+The biggest risk of these dependencies is `react-query`. It seems React Native should be supported reading the documentation, except for the developer tools widget. Here's a link to the documentation page for reference: [React Query Documentation](https://react-query.tanstack.com/react-native). We would have to implement some events manually when using React Native. 
+
+*Events*
+* Online Status Management
+* Refetch on App Focus
+* Refetch on Screen Focus
+
+#### Implementation
+
+I've implemented basic unit tests to test if the `cms-api-client` library could be installed correctly in the React Native project. I'm also making components for testing the library running on actual device within the React Native build.
+
+#### Conclusion
+Both the unit tests and the component running inside of application is able to perform the network requests as expected. This indicated we should be able to use this library in React Native application without modification.
+
+### User Service
+There's no client side library for the `User Service` but the code interacting with `User Service` in the Cordova application is well separated. I will move that code to the React Native project and try implementing some tests.
+
+#### Dependencies
+* recoil
+* recoil-persist
+* @apollo/client
+
+Based on online research the `recoil` library is not supporting React Native yet. It's only used for persistent state and should be easily replaced by something else.
+
+The `node` runtime doesn't include `fetch` function when running unit tests. There seems to be multiple workarounds for this issue and the one I'm going to try doing is using `jest-fetch-mock` library.
+
+Upon trying to use `@apollo/client` I ran into an error:
+
+```
+Error: While trying to resolve module `@apollo/client` ...
+```
+
+After researching online it seemed possible to solve this by modifying the metro configuraton. This issue was solved by adding resolver matching for `cjs` files to `metro.config.js`
+
+Another issue occuring in the native logs is this one:
+```
+ReactContextBaseJavaModule: Unhandled SoftException
+    java.lang.RuntimeException: Catalyst Instance has already disappeared: requested by WebSocketModule
+```
+
+Exact side effect of this error is unknown so far. It's a risk if we can't find any solution for it. Up until this point I haven't found any noticable degradation of app functions because of it.
+
+Here's a github issue with other people experiencing the same problem:
+https://github.com/facebook/react-native/issues/28992
+
+#### Implementation
+Deleting the `atom.ts` file part of user service client code because of the unsupported `recoil` library. Additionally installing the `@apollo/client` library as it should be fully suported in React Native. Finally removing the code referencing internal state from the Cordova appliation, specifically related to region selection and user authentication token.
+
+To test the user service / graphql support in React Native I will take the same approach as with `CMS Api Client`, making basic integration tests and a component for running within the app build.
+
+#### Conclusion
+The code and `GraphQL` connection seems to be working as intended with the limited unauthenticated request tested so far. The unresolved issue is a risk and we may have to spend some time resolving that problem if it turns out to cause any issues degrading performance or functions of the application.
+
+### Live State
+The `kidsloop-live-state` library is responsible for signalling with `SFU2` service and in the future the communication with live server. Evaluating compatibility with this library is important because it would determine how much code we would have to write to connect with SFU.
+
+```sh
+npm install @kl-engineering/kidsloop-live-state
+```
+
+#### Dependencies
+* reduxjs/toolkit
+* eventemitter3
+* immer
+* nanoid
+* react-async-hook
+* redux
+* redux-immutable
+
+On initial inspection none of these libraries seem to have any reported issues with React Native.
+
+After installing the `kidsloop-live-state` library the metro development server is reporting errors, this is likely due to configuration error within the library itself and not because of React Native.
+
+```
+warn Package @kl-engineering/kidsloop-live-state has been ignored because it contains invalid configuration. Reason: Package subpath './package.json' is not defined by "exports" in /home/axel/Projects/kidsloop-react-native/node_modules/@kl-engineering/kidsloop-live-state/package.json
+```
+
+There's an issue reported about this in the `react-native-community/cli` repository. It seems it can be easily fixed by updating `package.json` file within the library.
+
+[Issue Link](https://github.com/react-native-community/cli/issues/1168)
+
+After making some local modifications to the `package.json` file within `kidsloop-live-state` I was able to import it properly. This all seems very odd so I will do some more testing later on in case it was just metro bundler or `npm` acting up.
+
+#### Implementation
+For this library I will create test components but not integration tests. This is because the things to test will:
+
+1. Require authentication to function
+2. Utilize camera and/or microphone
+
+TODO
+
+#### Conclusion
+TODO
+
+### WebRTC
+We use the WebRTC standard to enumerate and use the device camera and microphone. This standard is built into most web browsers but not built into mobile apps by default, including React Native. There is a library for React Native `react-native-webrtc` adding this functionality.
+
+#### Implementation
+The `react-native-webrtc` library is missing type definitions for some API's. This makes working with the library very hard; especially with Typescript. Because of this issue we have to create some custom type definitions. This in itself is not a huge issue, but it can't be considered a stable contract between our application code and `react-native-webrtc`. We have no guarantees the ABI (for lack of a better term) doesn't change over time.
+
+The `react-native-webrtc` library will not ask for permissions automatically before trying to access camera or microphone resources. We have to implement the permissions checking ourselves. This might be different between Android and iOS since iOS usually doesn't require explicit permission requests, instead the iOS OS will ask for permissions automatically before trying to use any sensitive resources.
+
+I had to set the `minSdkVersion` to `24` for `react-native-webrtc` library to work, without it the application crash on startup.
+
+The `react-native-webrtc` library seems to be heavily geared towards selecting camera based on facing as opposed to selecting by ID's. This might make it more tricky for us to have the dropdown menus from current KidsLoop application to select the camera device. I don't think this would be a problem on mobile since it's very common to just provide front/back toggle regardless.
+
+The type information for camera track constraints doesn't seem to match the documentation. This will delay developers working with this and might cause some confusions.
+
+#### Conclusion
+So far I've been able to retrieve a camera stream and display it on screen. This only partly tests the `WebRTC` compatibility and I think we would need to estimate extra time in case anything goes wrong or doesn't work as expected. This is a high risk feature and it would be good to spend time and dig deeper to find possible limitations for both iOS and Android.
