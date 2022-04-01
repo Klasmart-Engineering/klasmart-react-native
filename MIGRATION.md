@@ -88,3 +88,13 @@ I spent roughly 4-5 hours migrating the visual design and layout of the landing 
 
 The landing page has a very simple layout and design with a couple of images, text, and a button. This might have contributed to being able to migrate it quickly. Other pages with more complex layout will most likely take longer time (e.g. scroll views and lists). 
 
+
+### IAM AzureB2c
+AzureB2C is the chosen authentication system for kidsloop. It requires a certain amount of setup within AzureB2C in order for kidsloop Users can use our mobile app and be redirected back to the app once they have authenticated.
+#### Implementation
+AzureB2C requires that an AzureB2C application be set up for each application in code. We currently have a 'KidsLoop Mobile App' setup in the Alpha environment for the previous NextGen app but more research is needed to understand how we integrate it into a react-native app. The AzureB2C app currently redirects to `live.kidsloop.sso.kidsloop-android://oauth/redirect`. It seems that we should be able to use Deep Links to have the app receive traffic to this endpoint.
+
+We will also need to have the AzureB2C application implemented in higher environments { stage, Prod }. At present these 
+applications are setup manually which isn't a big deal but is worth bearing in mind. A more dynamic approach with Terraform has been prototyped but there is significant complexity in setting up AzureB2C. 
+
+Another factor to bear in mind is that although we can create native interfaces Azure has a strong preference for managing the HTML used in signin/signup/password reset pages. This means that we're almost certainly tied to using a WebView for browser pages in the authentication process.
