@@ -45,7 +45,7 @@ const style = StyleSheet.create({
 type Props = {
 }
 
-export const Live: React.VFC<Props> = () => {
+export const LiveScreen: React.VFC<Props> = () => {
     return (
         <View style={style.container}>
             <View style={style.main}>
