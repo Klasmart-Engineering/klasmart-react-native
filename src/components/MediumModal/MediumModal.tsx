@@ -1,27 +1,27 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Text, View } from "react-native";
 import { ScreenParams } from "../../routes/Provider/Provider";
-import { DetailsScreenRouteName } from "../../screens/Details/Details";
+import { DetailsScreenRouteName } from "../../screens/Details";
 import React from "react";
-import { MediumModalRouteName } from "../MediumModal";
+import { MiniModalRouteName } from "../MiniModal";
 
-export interface MiniModalParams {
+export interface MediumModalParams {
 }
 
-export const MiniModalRouteName = `MiniModal`;
+export const MediumModalRouteName = `MediumModal`;
 
-type MiniModalProps = NativeStackScreenProps<ScreenParams, `MiniModal`>
+type MediumModalProps = NativeStackScreenProps<ScreenParams, `MediumModal`>
 
-const MiniModal: React.VFC<MiniModalProps> = (props) => {
+const MediumModal: React.VFC<MediumModalProps> = (props) => {
   return (
     <View style={{
       borderRadius: 12,
       backgroundColor: `#FFDADA`,
     }}>
-      <Text>Mini modal</Text>
+      <Text>Medium modal</Text>
       <Button
-        title="Open Medium modal"
-        onPress={() => props.navigation.navigate(MediumModalRouteName, {})}
+        title="Open Mini modal"
+        onPress={() => props.navigation.navigate(MiniModalRouteName, {})}
       />
       <Button
         title="Go to Details 666"
@@ -33,4 +33,4 @@ const MiniModal: React.VFC<MiniModalProps> = (props) => {
   );
 };
 
-export default MiniModal;
+export default MediumModal;

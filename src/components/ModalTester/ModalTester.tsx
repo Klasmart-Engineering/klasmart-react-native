@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
-import { DetailsScreenRouteName } from "../../screens/DetailsScreen";
+import { DetailsScreenRouteName } from "../../screens/Details";
 
 const ModalTester: React.VFC = () => {
   const navigation = useNavigation();
@@ -25,7 +25,7 @@ const ModalTester: React.VFC = () => {
             title="Go to Details 666"
             onPress={async () => {
               setModalVisible(false);
-              const kex = await navigation.navigate(DetailsScreenRouteName, {
+              navigation.navigate(DetailsScreenRouteName, {
                 id: `666`
               })
               setModalVisible(true);
