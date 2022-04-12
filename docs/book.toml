@@ -1,0 +1,6 @@
+[book]
+authors = ["Axel Wettervik"]
+language = "en"
+multilingual = false
+src = "src"
+title = "KidsLoop"
