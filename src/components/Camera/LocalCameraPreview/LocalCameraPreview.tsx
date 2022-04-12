@@ -1,8 +1,22 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useState
+} from "react";
+import {
+    StyleSheet,
+    Text,
+    View
+} from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { mediaDevices, MediaStream, RTCView } from "react-native-webrtc";
-import { Facing, MediaDeviceInfo } from "../../../types/webrtc/mediaDeviceInfo";
+import {
+    Facing,
+    mediaDevices,
+    MediaStream,
+    RTCView,
+    MediaDeviceInfo
+} from "react-native-webrtc";
 
 const style = StyleSheet.create({
     container: {
@@ -34,13 +48,13 @@ const style = StyleSheet.create({
 
 const LocalCameraPreview: React.VFC = () => {
     const [ mediaDeviceSources, setMediaDeviceSources ] = useState<MediaDeviceInfo[]>([]);
-
-    const cameras = useMemo(() => mediaDeviceSources.filter(device => device.kind === "videoinput"), [ mediaDeviceSources ]);
     const [ selectedCameraFacing, setSelectedCameraFacing ] = useState<Facing>("user");
     const [ mediaStream, setMediaStream ] = useState<MediaStream>();
 
+    const cameras = useMemo(() => mediaDeviceSources.filter((device) => device.kind === "videoinput"), [ mediaDeviceSources ]);
+
     useEffect(() => {
-        mediaDevices.enumerateDevices().then(sources => {
+        mediaDevices.enumerateDevices().then((sources: MediaDeviceInfo[]) => {
             setMediaDeviceSources(sources);
         }).catch(error => {
             console.error(error);
