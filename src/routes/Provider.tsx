@@ -5,9 +5,11 @@ import HomeScreen, {HomeParams} from '../screens/HomeScreen';
 import Toolbar from "../components/Toolbar/Toolbar";
 import MiniModal, { MiniModalParams } from "../components/MiniModal/MiniModal";
 import MediumModal, { MediumModalParams } from "../components/MiniModal/MediumModal";
+import { LandingParams, LandingScreen } from "../screens/LandingScreen";
 
 
 export type ScreenParams = {
+  Landing: LandingParams;
   Home: HomeParams;
   Details: DetailsParams;
   MiniModal: MiniModalParams;
@@ -21,11 +23,15 @@ const RouteProvider: React.VFC<RouteProviderProps> = (props) => {
   const Stack = createNativeStackNavigator<ScreenParams>();
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Landing"
       screenOptions={{
         header: (props) => <></>
       }}
     >
+      <Stack.Screen
+        name="Landing"
+        component={LandingScreen}
+      />
       <Stack.Screen
         name="Home"
         component={HomeScreen}

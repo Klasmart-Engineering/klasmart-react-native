@@ -1,8 +1,10 @@
 import KidsloopTextLogo from "../assets/img/kidsloop_logo.svg";
 import BackgroundCloudsBalloon from "../assets/img/landing/background_clouds_balloon.svg";
 import BackgroundGreenGrass from "../assets/img/landing/background_green_grass.svg";
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, Text, View, Button } from "react-native";
+import { ScreenParams } from "../routes/Provider";
 
 const landingPageStyle = StyleSheet.create({
     container: {
@@ -44,7 +46,12 @@ const landingPageStyle = StyleSheet.create({
     },
 });
 
-export function LandingScreen (): JSX.Element {
+export type LandingParams = {
+};
+
+type LandingScreenProps = NativeStackScreenProps<ScreenParams, `Landing`>
+
+export const LandingScreen: React.VFC<LandingScreenProps> = ({ navigation }) => {
 
     return (
         <View style={landingPageStyle.container}>
@@ -61,7 +68,7 @@ export function LandingScreen (): JSX.Element {
                     Education Platform for Students
                 </Text>
             <View style={landingPageStyle.signInButtonContainer}>
-                <Button title={`Sign In`} />
+                <Button title={`Sign In`} onPress={() => navigation.navigate(`Home`, {})} />
             </View>
         </View>
     );
