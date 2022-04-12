@@ -1,6 +1,4 @@
-# Getting Started
-
-## Running on Android
+# Running on Android
 Ensure the Android device is connected to `adb` over USB or WiFi.
 
 The status of connected devices can be confirmed using the following command:
