@@ -44,7 +44,7 @@ const landingPageStyle = StyleSheet.create({
     },
 });
 
-export function LandingPage (): JSX.Element {
+export function LandingScreen (): JSX.Element {
 
     return (
         <View style={landingPageStyle.container}>

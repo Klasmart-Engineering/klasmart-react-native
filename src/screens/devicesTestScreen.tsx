@@ -10,7 +10,7 @@ const style = StyleSheet.create({
     },
 });
 
-export const DevicesTestPage: React.VFC = () => {
+export const DevicesTestScreen: React.VFC = () => {
     return (
         <View style={style.container}>
             <LocalCameraPreview />

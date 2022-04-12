@@ -1,10 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { QueryMeStatusText } from "../components/queryMeStatusText";
 import { FetchScheduleStatusText } from "../components/fetchScheduleStatusText";
-import { UserServiceApolloClient } from "../services/user/userServiceApolloClient";
-
-const USER_SERVICE_ENDPOINT = `https://api.alpha.kidsloop.net/user/`;
+import { CmsApiProvider } from "../providers/CmsApiProvider";
 
 const style = StyleSheet.create({
     container: {
@@ -15,12 +12,12 @@ const style = StyleSheet.create({
     },
 });
 
-export const UserTestPage: React.VFC = () => {
+export const CmsTestScreen: React.VFC = () => {
     return (
-        <UserServiceApolloClient endpoint={USER_SERVICE_ENDPOINT}>
+        <CmsApiProvider>
             <View style={style.container}>
-                <QueryMeStatusText />
+                <FetchScheduleStatusText />
             </View>
-        </UserServiceApolloClient>
+        </CmsApiProvider>
     );
 };
