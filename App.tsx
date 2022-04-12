@@ -1,10 +1,6 @@
 import React from "react";
-import { PermissionsAndroid, SafeAreaView, StatusBar, Text, useColorScheme, View } from "react-native";
+import { useColorScheme } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { PermissionsGate } from "./src/components/permissionsGate";
-import { CmsTestPage } from "./src/screens/cmsTestPage";
-import { DevicesTestPage } from "./src/screens/devicesTestPage";
-import { UserTestPage } from "./src/screens/userTestPage";
 import { NavigationContainer } from '@react-navigation/native';
 import RouteProvider from "./src/routes/Provider";
 
