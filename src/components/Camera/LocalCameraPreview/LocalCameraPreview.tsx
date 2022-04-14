@@ -32,7 +32,7 @@ type Props = {
 };
 
 const LocalCameraPreview: React.VFC<Props> = (props) => {
-    const mediaStream = useLocalCamera({ facingMode: props.facingMode });
+    const { mediaStream } = useLocalCamera({ facingMode: props.facingMode });
 
     return (
         <View style={styles.container}>

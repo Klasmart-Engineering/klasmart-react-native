@@ -6,6 +6,7 @@ import { WebRtcProvider, useCamera, useMicrophone } from "@kl-engineering/live-s
 import { nanoid } from "nanoid";
 import { ScreenParams } from "../../routes/Provider";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MediaStreamConstraints } from "react-native-webrtc";
 
 const style = StyleSheet.create({
     container: {
@@ -49,13 +50,14 @@ const style = StyleSheet.create({
 export const LiveScreenRouteName = `Live`;
 
 export interface LiveParams {
+    mediaConstraints: MediaStreamConstraints;
 }
 
 export type LiveScreenProps = NativeStackScreenProps<ScreenParams, `Live`>;
 
 const WEBRTC_ENDPOINT = "https://live.alpha.kidsloop.net/sfu";
 
-const LiveScreen: React.VFC<LiveScreenProps> = () => {
+const LiveScreen: React.VFC<LiveScreenProps> = (props) => {
     // const camera = useCamera();
     // const microphone = useMicrophone();
 

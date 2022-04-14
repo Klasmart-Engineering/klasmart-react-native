@@ -5,6 +5,7 @@ import {
     MediaStream,
     MediaStreamConstraints,
 } from "react-native-webrtc";
+import useConstraints from "./useConstraints";
 
 interface Props {
     facingMode: Facing;
@@ -13,20 +14,7 @@ interface Props {
 export const useLocalCamera = (props: Props) => {
     const [mediaStream, setMediaStream] = useState<MediaStream>();
 
-    const constraints = useMemo<MediaStreamConstraints>(() => {
-        return {
-            video: {
-                mandatory: {
-                    minFrameRate: 10,
-                    minHeight: 640,
-                    minWidth: 480,
-                },
-                facingMode: props.facingMode,
-                optional: [],
-            },
-            audio: false,
-        }
-    }, [ props.facingMode ]);
+    const constraints = useConstraints({ facingMode: props.facingMode });
 
     useEffect(() => {
         mediaDevices.getUserMedia(constraints)
@@ -41,5 +29,5 @@ export const useLocalCamera = (props: Props) => {
 
     }, [ constraints ]);
 
-    return mediaStream;
+    return { mediaStream, constraints };
 };

@@ -7,6 +7,7 @@ import { Text } from "react-native-paper";
 import LocalCameraPreview from "../../components/Camera/LocalCameraPreview";
 import { Facing } from "react-native-webrtc";
 import PermissionsGate from "../../components/Common/PermissionsGate";
+import useConstraints from "../../hooks/camera/useConstraints";
 
 export const JoinScreenRouteName = `Join`;
 
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
 
 const JoinScreen: React.VFC<JoinScreenProps> = (props) => {
     const [ facingMode, setFacingMode ] = useState<Facing>("user");
+    const mediaConstraints = useConstraints({ facingMode });
 
     return (
         <PermissionsGate permissions={[
@@ -72,7 +74,7 @@ const JoinScreen: React.VFC<JoinScreenProps> = (props) => {
                         <Pressable style={styles.pressable} onPress={() => { setFacingMode(facingMode === "user" ? "environment" : "user")}}>
                             <Text style={styles.pressableText}>Flip Camera</Text>
                         </Pressable>
-                        <Pressable style={styles.pressable} onPress={() => props.navigation.replace(LiveScreenRouteName, {})}>
+                        <Pressable style={styles.pressable} onPress={() => props.navigation.replace(LiveScreenRouteName, { mediaConstraints })}>
                             <Text style={styles.pressableText}>Go Live</Text>
                         </Pressable>
                     </View>
