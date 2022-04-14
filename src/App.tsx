@@ -3,6 +3,10 @@ import { useColorScheme } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import RouteProvider from "./routes/Provider/Provider";
+// note(axel): Polyfill for URL
+import "react-native-url-polyfill/auto";
+// note(axel): Polyfill for crypto.getRandomValues
+import "react-native-get-random-values";
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';

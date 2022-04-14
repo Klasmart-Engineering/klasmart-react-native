@@ -6,6 +6,8 @@ import Toolbar from "../../components/Core/Toolbar/Toolbar";
 import MiniModal, { MiniModalParams } from "../../components/MiniModal/MiniModal";
 import MediumModal, { MediumModalParams } from "../../components/MediumModal";
 import LandingScreen, { LandingParams } from "../../screens/Landing";
+import LiveScreen, { LiveParams } from "../../screens/Live";
+import JoinScreen, { JoinParams } from "../../screens/Join";
 
 
 export type ScreenParams = {
@@ -14,6 +16,8 @@ export type ScreenParams = {
     Details: DetailsParams;
     MiniModal: MiniModalParams;
     MediumModal: MediumModalParams;
+    Live: LiveParams;
+    Join: JoinParams;
 };
 
 interface RouteProviderProps {
@@ -56,6 +60,14 @@ const RouteProvider: React.VFC<RouteProviderProps> = (props) => {
             options={{
                 presentation: `transparentModal`
             }}
+        />
+        <Stack.Screen
+            name="Join"
+            component={JoinScreen}
+        />
+        <Stack.Screen
+            name="Live"
+            component={LiveScreen}
         />
         </Stack.Navigator>
     );

@@ -7,6 +7,8 @@ import { DetailsScreenRouteName } from '../Details/Details';
 import EditText from "../../components/EditText/EditText";
 import { MiniModalRouteName } from "../../components/MiniModal/MiniModal";
 import ModalTester from "../../components/ModalTester/ModalTester";
+import { JoinScreenRouteName } from "../Join/Join";
+
 export const HomeScreenRouteName = `Home`;
 
 export interface HomeParams {
@@ -19,6 +21,9 @@ const HomeScreen: React.VFC<HomeScreenProps> = (props) => {
     <>
       <Text>Home</Text>
       <EditText />
+      <Button
+        title="Go Live"
+        onPress={() => props.navigation.navigate(JoinScreenRouteName, {})} />
       <Button
         title="Go to Details 666"
         onPress={() => props.navigation.navigate(DetailsScreenRouteName, {
