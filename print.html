@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>KidsLoop</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Development</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Getting Started</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="running_on_android.html"><strong aria-hidden="true">1.1.</strong> Running on Android</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.2.</strong> Running on iOS</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Project Structure</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">2.1.</strong> Creating Screens</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.2.</strong> Creating Components</div></li></ol></li><li class="chapter-item expanded "><a href="MIGRATION.html">Migration Notes</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">KidsLoop</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div style="break-before: page; page-break-before: always;"></div><h1 id="running-on-android"><a class="header" href="#running-on-android">Running on Android</a></h1>
+<p>Ensure the Android device is connected to <code>adb</code> over USB or WiFi.</p>
+<p>The status of connected devices can be confirmed using the following command:</p>
+<pre><code class="language-sh">adb devices
+</code></pre>
+<p>Next step is starting the <code>react-native</code> development server. This will facilitate hot reloading changes and debugging:</p>
+<pre><code class="language-sh">npx react-native start
+</code></pre>
+<p>Finally build and install the application on the device:</p>
+<pre><code class="language-sh">npx react-native run-android
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="migrating-kidsloop-cordova---react-native"><a class="header" href="#migrating-kidsloop-cordova---react-native">Migrating KidsLoop Cordova -&gt; React Native</a></h1>
+<p>This document is a worklog for the evaluation of how hard it is to migrate KidsLoop application code from Cordova to React Native.</p>
+<p>The starting point of this document is a clean <code>react-native-template-typescript</code> project and as work is progressing more pages, components, and libraries will be added from the <code>KidsLoop Cordova</code> project.</p>
+<h2 id="migrating-landing-page"><a class="header" href="#migrating-landing-page">Migrating Landing Page</a></h2>
+<p>The first challenge and test will be to migrate or replicate the KidsLoop landing page from the <code>Cordova</code> Project to the <code>React Native</code> project.</p>
+<p>The landing page in Cordova application is composed of an image background with a button to continue to the sign in page. This is a very simple case with almost no business logic.</p>
+<h3 id="dependencies"><a class="header" href="#dependencies">Dependencies</a></h3>
+<p>The <code>landingPage.tsx</code> file without modifications have some dependencies to other libraries. Some of these libraries might be compatible with <code>React Native</code> but some might not be. I will be trying to research compatibility or alternatives using sources online, or by manually testing.</p>
+<p>In some cases there migh be dependencies we can use instead sharing the same API/interface which could make migration faster.</p>
+<ul>
+<li>material-ui</li>
+<li>react-intl</li>
+<li>react-router-dom</li>
+<li>recoil</li>
+</ul>
+<p>Additionally the <code>landingPage.tsx</code> page also have some references to files within the <code>Cordova</code> project. These references I will remove or comment away for this migration test. The references is there mostly for the parental lock function.</p>
+<ul>
+<li>completeParentalGate (../../model/appModel)</li>
+<li>DialogParentalLock (@/app/components/ParentalLock)</li>
+<li>dialogsState (@/app/model/appModel)</li>
+</ul>
+<p>Finally <code>landingPage.tsx</code> references some image assets (<code>.svg</code> format). These images I will try to include and display within the <code>React Native</code> application.</p>
+<ul>
+<li>KidsLoopTextLogo (@/assets/img/kidsloop_logo.svg)</li>
+<li>BackgroundCloudsBalloon (@/assets/img/landing/background_clouds_balloon.svg)</li>
+<li>BackgroundGreenGrass (@/assets/img/landing/background_green_grass.svg)</li>
+</ul>
+<h4 id="material-ui"><a class="header" href="#material-ui">Material UI</a></h4>
+<p>Based on research online it seems like a <code>Material UI</code> library with similar syntax exists for <code>React Native</code>. My first attempt will be to try using that to preferably avoid having to change too much layout or UI related code within each component.</p>
+<pre><code class="language-sh">npm install react-native-paper
+</code></pre>
+<p><code>useMediaQuery</code> doesn't exist in <code>React Native</code>. There's libraries adding limited support for it but I think the better option is to not use it. Media queries is a very web specific function and should not be needed in a <code>React Native</code> application.</p>
+<p><code>makeStyles</code> is not available in <code>React Native</code>. Instead there's <code>StyleSheet.create</code> which have almost the same behavior. I will replace any <code>makeStyles</code> with <code>StyleSheet.create</code>. <code>StyleSheet</code> in <code>React Native</code> try to simulate CSS for the web, naturally not all features or directives is available, so the style definition must be modified to be compatible.</p>
+<p>It seems out of the box React Native doesn't support <code>Themes</code>, to achieve feature parity we have to support dark and light themes. There's libraries providing this and I will try installing the <code>react-native-theme</code> library to facilitate that. Additionally this library will pull in <code>react-native-extended-stylesheet</code> library.</p>
+<p>I will create a new file where the themes can be defined, trying to replicate the granularity of themes and color palettes we have in the <code>Cordova</code> application.</p>
+<pre><code class="language-sh">npm install @dokuhero/react-native-theme
+</code></pre>
+<p><code>Grid</code> component doesn't come included with <code>React Native</code> there is however a library <code>react-native-grid-component</code> we can add to include it. I will try using the <code>Grid</code> component from that library.</p>
+<pre><code class="language-sh">npm install react-native-grid-component
+</code></pre>
+<p><code>react-native-grid-component</code> doesn't include Typescript type definition. We would have to generate our own type definitions or use a different library if we want to keep using the <code>Grid</code> component with type safety. Based on this information I think the best option might be to move away from <code>Grid</code> based layouts, this of course would severely reduce our ability to simply reuse UI components from the <code>Cordova</code> app. Even if we were able to find a good <code>Grid</code> component library, the way <code>Grid</code> would work in <code>React Native</code> would most likely be different from <code>Cordova</code>.</p>
+<p>Layouts in React Native work similar to CSS flexbox. It's defined using the <code>View</code> component which can be specified using similar attributes as web. Most UI layout in the Cordova application is defined using the Material UI <code>Grid</code> component. It seems the best approach will be do redo layout using the <code>View</code> component.</p>
+<p>My assessment based on these previous points about various components for UI layout used in the <code>Cordova</code> application is that we'll have to reimplement most of the frontend design in <code>React Native</code>. This will be faster than doing it natively since it's similar but not the same to regular React. Having the <code>Cordova</code> application UI to use as a reference will also help speed this up, both being able to look at it visually and being able to look at the code.</p>
+<h4 id="svg-image-assets"><a class="header" href="#svg-image-assets">SVG Image Assets</a></h4>
+<p>To support SVG image assets in react native we have to instal a couple of libraries: <code>react-native-svg</code> and <code>react-native-svg-transformer</code></p>
+<pre><code class="language-sh">npm install react-native-svg react-native-svg-transformer
+</code></pre>
+<p>We also have to update the <code>metro.config.js</code> file to instruct <code>React Native</code> to transform any <code>.svg</code> assets using the <code>react-native-svg-transformer</code> library.</p>
+<p>There is also additional work to be done to supprt using <code>.svg</code> assets within <code>Jest</code> unit tests. A full <a href="https://medium.com/mtholla/react-native-how-to-use-svgs-193e384e1d1b">guide</a> can be used as a reference.</p>
+<p><em>TODO</em> After following the previous guide to support <code>.svg</code> image assets it seems the editor doesn't properly understand <code>.svg</code> images is valid to import. So we'll have to spend some time to understand and fix that issue.</p>
+<h4 id="localization--lokalise"><a class="header" href="#localization--lokalise">Localization / Lokalise</a></h4>
+<p><em>TODO</em></p>
+<h4 id="screen-orientation"><a class="header" href="#screen-orientation">Screen Orientation</a></h4>
+<p>In the KidsLoop Cordova aplication screen orientation is locked to Portrait when user is on certain pages.</p>
+<p><em>TODO</em> Figure out how to conventiently control the screen orientation from certain pages.</p>
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
+<p>I spent roughly 4-5 hours migrating the visual design and layout of the landing page. This was including researching but <em>not</em> implementing support for themes and localization. It's the first time I've worked with React Native so the time might be shorter once used to the workflow and API's.</p>
+<p>The landing page has a very simple layout and design with a couple of images, text, and a button. This might have contributed to being able to migrate it quickly. Other pages with more complex layout will most likely take longer time (e.g. scroll views and lists). </p>
+<h2 id="client-side-libraries"><a class="header" href="#client-side-libraries">Client Side Libraries</a></h2>
+<p>We would be able to save a lot of time if we can reuse some of the client side libraries developed for web and cordova application. These libraries help us communicate with out backend services and API's.</p>
+<h3 id="cms-api-client"><a class="header" href="#cms-api-client">CMS API Client</a></h3>
+<h4 id="dependencies-1"><a class="header" href="#dependencies-1">Dependencies</a></h4>
+<p>Installing and investigating the dependencies of <code>CMS API Client</code> uncovers some dependencies which might cause issues. Listed below is the list of all dependencies the library requires.</p>
+<p><em>Dependencies</em></p>
+<ul>
+<li>axios</li>
+<li>react-query</li>
+</ul>
+<p><em>Peer Dependencies</em></p>
+<ul>
+<li>axios</li>
+<li>react</li>
+<li>react-dom</li>
+<li>react-query</li>
+</ul>
+<p>The biggest risk of these dependencies is <code>react-query</code>. It seems React Native should be supported reading the documentation, except for the developer tools widget. Here's a link to the documentation page for reference: <a href="https://react-query.tanstack.com/react-native">React Query Documentation</a>. We would have to implement some events manually when using React Native. </p>
+<p><em>Events</em></p>
+<ul>
+<li>Online Status Management</li>
+<li>Refetch on App Focus</li>
+<li>Refetch on Screen Focus</li>
+</ul>
+<h4 id="implementation"><a class="header" href="#implementation">Implementation</a></h4>
+<p>I've implemented basic unit tests to test if the <code>cms-api-client</code> library could be installed correctly in the React Native project. I'm also making components for testing the library running on actual device within the React Native build.</p>
+<h4 id="conclusion-1"><a class="header" href="#conclusion-1">Conclusion</a></h4>
+<p>Both the unit tests and the component running inside of application is able to perform the network requests as expected. This indicated we should be able to use this library in React Native application without modification.</p>
+<h3 id="user-service"><a class="header" href="#user-service">User Service</a></h3>
+<p>There's no client side library for the <code>User Service</code> but the code interacting with <code>User Service</code> in the Cordova application is well separated. I will move that code to the React Native project and try implementing some tests.</p>
+<h4 id="dependencies-2"><a class="header" href="#dependencies-2">Dependencies</a></h4>
+<ul>
+<li>recoil</li>
+<li>recoil-persist</li>
+<li>@apollo/client</li>
+</ul>
+<p>Based on online research the <code>recoil</code> library is not supporting React Native yet. It's only used for persistent state and should be easily replaced by something else.</p>
+<p>The <code>node</code> runtime doesn't include <code>fetch</code> function when running unit tests. There seems to be multiple workarounds for this issue and the one I'm going to try doing is using <code>jest-fetch-mock</code> library.</p>
+<p>Upon trying to use <code>@apollo/client</code> I ran into an error:</p>
+<pre><code>Error: While trying to resolve module `@apollo/client` ...
+</code></pre>
+<p>After researching online it seemed possible to solve this by modifying the metro configuraton. This issue was solved by adding resolver matching for <code>cjs</code> files to <code>metro.config.js</code></p>
+<p>Another issue occuring in the native logs is this one:</p>
+<pre><code>ReactContextBaseJavaModule: Unhandled SoftException
+    java.lang.RuntimeException: Catalyst Instance has already disappeared: requested by WebSocketModule
+</code></pre>
+<p>Exact side effect of this error is unknown so far. It's a risk if we can't find any solution for it. Up until this point I haven't found any noticable degradation of app functions because of it.</p>
+<p>Here's a github issue with other people experiencing the same problem:
+https://github.com/facebook/react-native/issues/28992</p>
+<h4 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h4>
+<p>Deleting the <code>atom.ts</code> file part of user service client code because of the unsupported <code>recoil</code> library. Additionally installing the <code>@apollo/client</code> library as it should be fully suported in React Native. Finally removing the code referencing internal state from the Cordova appliation, specifically related to region selection and user authentication token.</p>
+<p>To test the user service / graphql support in React Native I will take the same approach as with <code>CMS Api Client</code>, making basic integration tests and a component for running within the app build.</p>
+<h4 id="conclusion-2"><a class="header" href="#conclusion-2">Conclusion</a></h4>
+<p>The code and <code>GraphQL</code> connection seems to be working as intended with the limited unauthenticated request tested so far. The unresolved issue is a risk and we may have to spend some time resolving that problem if it turns out to cause any issues degrading performance or functions of the application.</p>
+<h3 id="live-state"><a class="header" href="#live-state">Live State</a></h3>
+<p>The <code>kidsloop-live-state</code> library is responsible for signalling with <code>SFU2</code> service and in the future the communication with live server. Evaluating compatibility with this library is important because it would determine how much code we would have to write to connect with SFU.</p>
+<pre><code class="language-sh">npm install @kl-engineering/kidsloop-live-state
+</code></pre>
+<h4 id="dependencies-3"><a class="header" href="#dependencies-3">Dependencies</a></h4>
+<ul>
+<li>reduxjs/toolkit</li>
+<li>eventemitter3</li>
+<li>immer</li>
+<li>nanoid</li>
+<li>react-async-hook</li>
+<li>redux</li>
+<li>redux-immutable</li>
+</ul>
+<p>On initial inspection none of these libraries seem to have any reported issues with React Native.</p>
+<p>After installing the <code>kidsloop-live-state</code> library the metro development server is reporting errors, this is likely due to configuration error within the library itself and not because of React Native.</p>
+<pre><code>warn Package @kl-engineering/kidsloop-live-state has been ignored because it contains invalid configuration. Reason: Package subpath './package.json' is not defined by &quot;exports&quot; in /home/axel/Projects/kidsloop-react-native/node_modules/@kl-engineering/kidsloop-live-state/package.json
+</code></pre>
+<p>There's an issue reported about this in the <code>react-native-community/cli</code> repository. It seems it can be easily fixed by updating <code>package.json</code> file within the library.</p>
+<p><a href="https://github.com/react-native-community/cli/issues/1168">Issue Link</a></p>
+<p>After making some local modifications to the <code>package.json</code> file within <code>kidsloop-live-state</code> I was able to import it properly. This all seems very odd so I will do some more testing later on in case it was just metro bundler or <code>npm</code> acting up.</p>
+<h4 id="implementation-2"><a class="header" href="#implementation-2">Implementation</a></h4>
+<p>For this library I will create test components but not integration tests. This is because the things to test will:</p>
+<ol>
+<li>Require authentication to function</li>
+<li>Utilize camera and/or microphone</li>
+</ol>
+<p>TODO</p>
+<h4 id="conclusion-3"><a class="header" href="#conclusion-3">Conclusion</a></h4>
+<p>TODO</p>
+<h3 id="webrtc"><a class="header" href="#webrtc">WebRTC</a></h3>
+<p>We use the WebRTC standard to enumerate and use the device camera and microphone. This standard is built into most web browsers but not built into mobile apps by default, including React Native. There is a library for React Native <code>react-native-webrtc</code> adding this functionality.</p>
+<h4 id="implementation-3"><a class="header" href="#implementation-3">Implementation</a></h4>
+<p>The <code>react-native-webrtc</code> library is missing type definitions for some API's. This makes working with the library very hard; especially with Typescript. Because of this issue we have to create some custom type definitions. This in itself is not a huge issue, but it can't be considered a stable contract between our application code and <code>react-native-webrtc</code>. We have no guarantees the ABI (for lack of a better term) doesn't change over time.</p>
+<p>The <code>react-native-webrtc</code> library will not ask for permissions automatically before trying to access camera or microphone resources. We have to implement the permissions checking ourselves. This might be different between Android and iOS since iOS usually doesn't require explicit permission requests, instead the iOS OS will ask for permissions automatically before trying to use any sensitive resources.</p>
+<p>I had to set the <code>minSdkVersion</code> to <code>24</code> for <code>react-native-webrtc</code> library to work, without it the application crash on startup.</p>
+<p>The <code>react-native-webrtc</code> library seems to be heavily geared towards selecting camera based on facing as opposed to selecting by ID's. This might make it more tricky for us to have the dropdown menus from current KidsLoop application to select the camera device. I don't think this would be a problem on mobile since it's very common to just provide front/back toggle regardless.</p>
+<p>The type information for camera track constraints doesn't seem to match the documentation. This will delay developers working with this and might cause some confusions.</p>
+<h4 id="conclusion-4"><a class="header" href="#conclusion-4">Conclusion</a></h4>
+<p>So far I've been able to retrieve a camera stream and display it on screen. This only partly tests the <code>WebRTC</code> compatibility and I think we would need to estimate extra time in case anything goes wrong or doesn't work as expected. This is a high risk feature and it would be good to spend time and dig deeper to find possible limitations for both iOS and Android.</p>
+<h3 id="iam-azureb2c"><a class="header" href="#iam-azureb2c">IAM AzureB2c</a></h3>
+<p>AzureB2C is the chosen authentication system for kidsloop. It requires a certain amount of setup within AzureB2C in order for kidsloop Users can use our mobile app and be redirected back to the app once they have authenticated.</p>
+<h4 id="implementation-4"><a class="header" href="#implementation-4">Implementation</a></h4>
+<p>AzureB2C requires that an AzureB2C application be set up for each application in code. We currently have a 'KidsLoop Mobile App' setup in the Alpha environment for the previous NextGen app but more research is needed to understand how we integrate it into a react-native app. The AzureB2C app currently redirects to <code>live.kidsloop.sso.kidsloop-android://oauth/redirect</code>. It seems that we should be able to use Deep Links to have the app receive traffic to this endpoint.</p>
+<p>We will also need to have the AzureB2C application implemented in higher environments { stage, Prod }. At present these 
+applications are setup manually which isn't a big deal but is worth bearing in mind. A more dynamic approach with Terraform has been prototyped but there is significant complexity in setting up AzureB2C. </p>
+<p>Another factor to bear in mind is that although we can create native interfaces Azure has a strong preference for managing the HTML used in signin/signup/password reset pages. This means that we're almost certainly tied to using a WebView for browser pages in the authentication process.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+    </body>
+</html>
